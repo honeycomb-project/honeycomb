@@ -69,15 +69,13 @@ before_script:
   tar -C depends/SDKs -xf depends/sdk-sources/MacOSX${OSX_SDK}.sdk.tar.gz; fi
 - make $MAKEJOBS -C depends HOST=$HOST $DEP_OPTS
 script:
-- if [ "$CHECK_DOC" = 1 -a "$TRAVIS_REPO_SLUG" = "honeycomb-project/honeycomb" -a
-  "$TRAVIS_PULL_REQUEST" = "false" ]; then while read LINE; do travis_retry gpg --keyserver
-  hkp://subset.pool.sks-keyservers.net --recv-keys $LINE; done < contrib/verify-commits/trusted-keys;
-  fi
-- if [ "$CHECK_DOC" = 1 -a "$TRAVIS_REPO_SLUG" = "honeycomb-project/honeycomb" -a
-  "$TRAVIS_PULL_REQUEST" = "false" ]; then git fetch --unshallow; fi
-- if [ "$CHECK_DOC" = 1 -a "$TRAVIS_REPO_SLUG" = "honeycomb-project/honeycomb" -a
-  "$TRAVIS_PULL_REQUEST" = "false" ]; then contrib/verify-commits/verify-commits.sh;
-  fi
+- if [ "$CHECK_DOC" = 1 -a "$TRAVIS_REPO_SLUG" = "honeycomb-project/litecoin" -a "$TRAVIS_PULL_REQUEST"
+  = "false" ]; then while read LINE; do travis_retry gpg --keyserver hkp://subset.pool.sks-keyservers.net
+  --recv-keys $LINE; done < contrib/verify-commits/trusted-keys; fi
+- if [ "$CHECK_DOC" = 1 -a "$TRAVIS_REPO_SLUG" = "honeycomb-project/litecoin" -a "$TRAVIS_PULL_REQUEST"
+  = "false" ]; then git fetch --unshallow; fi
+- if [ "$CHECK_DOC" = 1 -a "$TRAVIS_REPO_SLUG" = "honeycomb-project/litecoin" -a "$TRAVIS_PULL_REQUEST"
+  = "false" ]; then contrib/verify-commits/verify-commits.sh; fi
 - export TRAVIS_COMMIT_LOG=`git log --format=fuller -1`
 - if [ -n "$USE_SHELL" ]; then export CONFIG_SHELL="$USE_SHELL"; fi
 - OUTDIR=$BASE_OUTDIR/$TRAVIS_PULL_REQUEST/$TRAVIS_JOB_NUMBER-$HOST
@@ -101,11 +99,10 @@ script:
   fi
 - if [ "$RUN_TESTS" = "true" ]; then test/functional/test_runner.py --coverage --quiet
   ${extended}; fi
-- if [ "$HOST" = "x86_64-apple-darwin11" ]; then
-    cd $TRAVIS_BUILD_DIR/build/ && tar -zcvf "Honeycomb-${HOST}.tar.gz" honeycomb-x86_64-apple-darwin11/dist/;
-  else
-    cd $TRAVIS_BUILD_DIR/out/$TRAVIS_PULL_REQUEST && tar -zcvf "Honeycomb-${HOST}.tar.gz" *$HOST;
-  fi
+- if [ "$HOST" = "x86_64-apple-darwin11" ]; then cd $TRAVIS_BUILD_DIR/build/ && tar
+  -zcvf "Honeycomb-${HOST}.tar.gz" honeycomb-x86_64-apple-darwin11/dist/; else cd
+  $TRAVIS_BUILD_DIR/out/$TRAVIS_PULL_REQUEST && tar -zcvf "Honeycomb-${HOST}.tar.gz"
+  *$HOST; fi
 after_script:
 - echo $TRAVIS_COMMIT_RANGE
 - echo $TRAVIS_COMMIT_LOG
@@ -113,9 +110,9 @@ before_deploy:
 - git tag "$(date +'%Y%m%d%H%M%S')-${HOST}"
 deploy:
   provider: releases
-  skip_cleanup: true
   api_key:
-    secure: H+3l8hSnCbPhCI1PfabiLJaWPnrD596FyzIzVMKp6v/p4/uMA7kcanjH8Vux57DV4igrf1MIbqT59qQbxVWPt0RDna6HFzqy74ZsECZFp/sg+7oDbu9pL8K01IJxs+9V7uQfytF5Neqdof9CSW8dp+QeC6YAIr24FqkN3/KhVIXqBmcj/YNKWkGmep+vzvdEKK+JNj/3s0ArlhXbq8hb3a45KtvAdSEraMKs/E2rzXpvoxcQ26F+l4gnHL1gI8gjRwx35YSeQjMCfEFxEctfsIKaYl54ffMfXcFDj30jghm4yn94a6frhL4T+I5+iCMEYoaADMl5NvnkvWyYeW/b4AgCYKAWvcuC4Qmgrkyf+hILDhl1C/5ghPcMNgOr0ud97WGPQY56EhtZ48Q99M4KgU3u39eD83Fzp9ZQ5Qs3bb8AMWkGRdk81jXVKJLhsOVYUJBsguDy3dJqswgaNOubeH0mXW9wRmWjEs0qnYIYOBagEXyREiYhDtsLVaxtwUemBkFhlJ/ZOxGOccQPAU/3PlEodl8merZMVEGNuGwGA5XgGhIB95LFZW1HSlYBbqDSoFeZrCu/LLgVVTrwinMTAS09toSugp5JzSJ3DL1tu1XQCMTcuaEXc7j6xz5o2lX+W78A/W2LZfCD6U5yYRAV6W9UPct5sLIXwftIMbiK3OY=
-  file: "Honeycomb-${HOST}.tar.gz"
+    secure: EdZ2xs4eJ+Iq9Mct/JMT0b45nSE3GwYwW5IiqGZbUVUb928cjQv1gsPFh10u9YYlaS4CO2uwJ5DVXNrvP5O5uz2OatYQU+on+LaZV88oIdosF4F3tCj2fLjuKdHiErKTzkV3Sq3vbstgIbJJaByXuz4A8O4YsohRGvy7iqHhHN7drVYYx3moEvSPWEjamIuOP9ofl+ee70D1WT19lxdeh6l8B4o4B4lHSSLkodJl+icYfQi7kPPIEyQ+1SdL5dFJXWVb5jtUgXaIZ2RxN9dGZy2j+/R6LC3Ygj2UpupWrdzVZFxSwV3wsE1Kqn66DLLGLbWd5u5VrGbktdKKKHJfSyi6/l/DEa1qrwOwewnOuKschZWUQLAxos49y3SnJtw1WezzkK8COcz/mv3VuRC5MNvrW7daZ+BMcdu595rocl02BWyAV7+e3JAzIuzxMzaPsn7yELCTZ4cxs2MSdDc3YrBN49gJZvepjj7lMO/HZGXRpxgU5wK2g8ycomVv8nMUMQVWJwZxXf8hpCFYzsO2w9fFUek/VMAt9oPLpwD2nLS9Y0ce4Dia+qkLM5lGRyA0/Do7Imjpz/Gl3saYxszgUgFieF9WvMKVWk7wt2AMeJJsWEa/Bfx2QpeJhQz1pM2opyKazmqpbHMXPeca6Df47zOGUHvVzbSiwe7dtHzJxko=
+  file: Honeycomb-${HOST}.tar.gz
   on:
+    repo: honeycomb-project/honeycomb
 repo: honeycomb-project/honeycomb
