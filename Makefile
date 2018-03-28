@@ -236,8 +236,7 @@ am__DIST_COMMON = $(srcdir)/Makefile.in \
 	$(top_srcdir)/test/functional/test_runner.py \
 	$(top_srcdir)/test/util/bitcoin-util-test.py COPYING \
 	build-aux/compile build-aux/config.guess build-aux/config.sub \
-	build-aux/depcomp build-aux/install-sh build-aux/ltmain.sh \
-	build-aux/missing
+	build-aux/install-sh build-aux/ltmain.sh build-aux/missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -279,14 +278,14 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /root/coin/Honeycomb/build-aux/missing aclocal-1.15
+ACLOCAL = ${SHELL} /root/updates/honeycomb/build-aux/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 0
 AR = /usr/bin/ar
 ARFLAGS = cr
-AUTOCONF = ${SHELL} /root/coin/Honeycomb/build-aux/missing autoconf
-AUTOHEADER = ${SHELL} /root/coin/Honeycomb/build-aux/missing autoheader
-AUTOMAKE = ${SHELL} /root/coin/Honeycomb/build-aux/missing automake-1.15
+AUTOCONF = ${SHELL} /root/updates/honeycomb/build-aux/missing autoconf
+AUTOHEADER = ${SHELL} /root/updates/honeycomb/build-aux/missing autoheader
+AUTOMAKE = ${SHELL} /root/updates/honeycomb/build-aux/missing automake-1.15
 AWK = gawk
 BDB_CFLAGS = 
 BDB_CPPFLAGS = 
@@ -381,7 +380,7 @@ LTLIBOBJS =
 LT_SYS_LIBRARY_PATH = 
 LUPDATE = /usr/lib/x86_64-linux-gnu/qt5/bin/lupdate
 MAINT = 
-MAKEINFO = ${SHELL} /root/coin/Honeycomb/build-aux/missing makeinfo
+MAKEINFO = ${SHELL} /root/updates/honeycomb/build-aux/missing makeinfo
 MAKENSIS = 
 MANIFEST_TOOL = :
 MINIUPNPC_CPPFLAGS = 
@@ -473,10 +472,10 @@ X11XCB_LIBS =
 XGETTEXT = 
 ZMQ_CFLAGS = 
 ZMQ_LIBS = -lzmq
-abs_builddir = /root/coin/Honeycomb
-abs_srcdir = /root/coin/Honeycomb
-abs_top_builddir = /root/coin/Honeycomb
-abs_top_srcdir = /root/coin/Honeycomb
+abs_builddir = /root/updates/honeycomb
+abs_srcdir = /root/updates/honeycomb
+abs_top_builddir = /root/updates/honeycomb
+abs_top_srcdir = /root/updates/honeycomb
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -508,7 +507,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /root/coin/Honeycomb/build-aux/install-sh
+install_sh = ${SHELL} /root/updates/honeycomb/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
